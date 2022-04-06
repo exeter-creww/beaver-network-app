@@ -1,0 +1,79 @@
+---
+title: Open Beaver Network (OBN) and Beaver Habitat Index (BHI)
+# subtitle: "Data summary report "
+author: | 
+  | Hugh A. Graham, Alan Puttock, Richard E. Brazier
+  | *Centre for Resilience in Environment, Water and Waste (CREWW), Geography, College of Life and  Environmental Sciences, University of Exeter, Exeter, UK*
+output: html_fragment
+---
+
+# Open Beaver Network (OBN) and Beaver Habitat Index (BHI)
+### Data Summary
+
+The OBN is a National scale river network model describing the suitability of 
+beaver forage (Beaver Forage Index) and the capacity to support beaver dams 
+(Beaver Dam Capacity Model). Additonal geomorphic, vegetation and Hydrological 
+attributes are also available on download. Also provided is the Beaver Habitat 
+Index (BHI) which is a gridded (raster) dataset that describes the suitability 
+of beaver forage within 200m of the river network with a resolution of 10 m. 
+
+These data are derived according to the methods desscribed in 
+<a href="https://link.springer.com/content/pdf/10.1007/s10344-020-01379-w.pdf" target="_blank">Graham, et al. (2020)</a> 
+as part of a partnership between the 
+<a href="https://www.exeter.ac.uk/research/creww/" target="_blank">Centre for Resilience in Environment, Water and Waste</a> 
+,at the University of Exeter, and 
+<a href="https://www.wildlifetrusts.org/" target="_blank">The Wildlife Trusts</a>.
+
+
+### Data Formats and Download:  
+
+The OBN is a spatial vector dataset comprising > 1 million line geometries. It is 
+available in either the GeoPackage format or ESRI shapefile. Both contained 
+within a .zip folder. To use either simply extract the contained files and load 
+with your preferred Geographic Information System (GIS). 
+
+The BHI is a spatial Raster dataset with each pixel containing a value of 0-5, 
+which describes the suitability of beaver forage. These data are provided at two 
+different resolutions: 1 km and 10 m; both are provided in Cloud Optimised Geotiff
+format. Geotiff is the most widely used raster format, readable by most GIS 
+software; Cloud optimisation enables its use directly from the source URL for 
+a range of software including GDAL and QGIS.
+
+Data may be downloaded by following the links in the navigation bar. Alternatively,
+the links are provided below:
+
+#### OBN
+*GeoPackage*:  
+<a href="**[INSERT-URL]**" target="_blank">**[INSERT-URL]**</a>  
+
+*ESRI Shapefile*:  
+<a href="**[INSERT-URL]**" target="_blank">**[INSERT-URL]**</a>  
+
+#### BHI
+*1 km Resolution*:  
+<a href="**[INSERT-URL]**" target="_blank">**[INSERT-URL]**</a>  
+  
+*10 m Resoltuion*:  
+<a href="**[INSERT-URL]**" target="_blank">**[INSERT-URL]**</a>  
+
+###  ![GtHubImg](GitHub-Mark-32px.png) Source Code:  
+<a href="https://github.com/h-a-graham/BDC_V1.2" target="_blank">Beaver Dam Capacity</a>  
+<a href="https://github.com/h-a-graham/BeaverNetwork-GB" target="_blank">Beaver Habitat Index</a>  
+<a href="https://github.com/exeter-creww/beaver-network-app" target="_blank">OpenBeaverNetwork App</a>  
+
+
+
+### Related publications:
+
+Graham, Hugh A., Alan Puttock, William W. Macfarlane, Joseph M. Wheaton, Jordan T. Gilbert, Róisín Campbell-Palmer, Mark Elliott, Martin J. Gaywood, Karen Anderson, and Richard E. Brazier. 2020. ‘Modelling Eurasian Beaver Foraging Habitat and Dam Suitability, for Predicting the Location and Number of Dams throughout Catchments in Great Britain’. European Journal of Wildlife Research 66 (3): 42. https://doi.org/10.1007/s10344-020-01379-w.
+
+Macfarlane, William W., Joseph M. Wheaton, Nicolaas Bouwes, Martha L. Jensen, Jordan T. Gilbert, Nate Hough-Snee, and John A. Shivik. 2017. ‘Modeling the Capacity of Riverscapes to Support Beaver Dams’. Geomorphology. https://doi.org/10.1016/j.geomorph.2015.11.019.
+
+Stoll, Nichole-Lynn, and Cherie J. Westbrook. 2020. ‘Beaver Dam Capacity of Canada’s Boreal Plain in Response to Environmental Change’. Scientific Reports 10 (1): 16800. https://doi.org/10.1038/s41598-020-73095-z.
+
+Scamardo, Julianne E., Sarah Marshall, and Ellen Wohl. 2022. ‘Estimating Widespread Beaver Dam Loss: Habitat Decline and Surface Storage Loss at a Regional Scale’. Ecosphere 13 (3): e3962. https://doi.org/10.1002/ecs2.3962.
+
+
+### License
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.

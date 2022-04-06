@@ -1,0 +1,140 @@
+---
+title: "OpenBeaverNetwork and Beaver Habitat Index"
+# subtitle: "Data summary report "
+author: | 
+  | Hugh A. Graham, Alan Puttock, Richard E. Brazier
+  | *Centre for Resilience in Environment, Water and Waste (CREWW), Geography, College of Life and  Environmental Sciences, University of Exeter, Exeter, UK*
+output: html_fragment
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(dplyr)
+library(kableExtra)
+source(file.path(here(), 'markdown', 'report_table_functions.R'))
+```
+
+# Open Beaver Network (OBN) and Beaver Habitat Index (BHI)
+## Introduction
+
+This app enables the viewing and download of the OpenBeaverNetwork (OBN) and Beaver Habitat Index (BHI) datasets for Great Britain. These data have been provided to the Wildlife Trust in partnership with the University of Exeter (UoE). 
+This page briefly outlines modelling methods and describes the structure and contents of the data to enable interrogation and interpretation by Wildlife Trust colleagues. These data are derived from open source products and are therefore free to share with acknowledgement of @graham2020, @morton2020, @copernicus2020, @forestrycommission2019, @ordnancesurvey2021 and @ordnancesurvey2022.
+
+&nbsp;
+
+## Beaver Habitat Index (BHI)
+
+Vegetation is important for classifying beaver habitat [@hartman1996; @john2010; @pinto2009; @st-pierre2017]. It was therefore critical to establish a reliable Beaver HabitatIndex (BHI) using nationally-available spatial datasets. No single dataset contained the detail required to depict all key vegetation types. Therefore, a composite dataset was created from:
+
+-   The Centre for Ecology and Hydrology (CEH) 2019 land cover map (LCM) [@morton2020] . This provides landcover classification at a resolution of 20m, derived from Sentinel 2 data using a random forest method. This dataset has been updated from the 2015 landcover map, used in our previous modelling work [@graham2020].
+
+-   Copernicus 2018 10 m tree cover density (TCD) [@copernicus2020] provides a percent tree cover density estimate which is derived from sentinel 2A + B satellite imagery using a random forest classification system. This dataset has been updated from the Copernicus TCD 2015, used in prior modelling work.
+
+-   The National Forest Inventory (NFI) Woodland Map [@forestrycommission2019] which includes woodland areas with an area \> 0.5 ha and a minimum width \> 20m. It is a partially derived from digitised Ordnance Survey (OS) MasterMap data but also includes additional woodland areas identified from other remotely sensed data sources.
+
+-   The (OS) VectorMap District [@ordnancesurvey2021] is a digitised spatial vector product, from which we extract the surface water areas, which include larger river channels (c.a. \>4 m wide) and still water bodies. This dataset and the NFI replaces the OS VectorMap Local data used in Graham et al., (2020).
+
+Vegetation datasets were assigned suitability values (zero to five). Zero values were assigned to areas of no vegetation e.g., buildings and values of five were assigned to favourable habitat e.g. deciduous woodland. Values were assigned based on a review of relevant literature [@gallant2004; @haarberg2006; @jenkins1979; @nolet1994; @oconnell2008], field observation and comparison with satellite imagery. Vector data were converted to raster format (resolution of 10 m). TCD data were warped (using cubic-spline transformation) from coordinate reference system (CRS) EPSG:3035 to EPSG:27700 to align with converted vector layers. An inference system was used to combine these raster datasets to create the Beaver Forge Index (BHI) [@graham2020]. The workflow prioritises the reliability followed by the highest value data. Examples of highly suitable land (graded 5) include broad-leaf woodland, mixed woodland and shrub; examples of suitable vegetation (graded 4) include shrub and marsh; examples of moderately suitable (graded 3) include coniferous woodland, shrub and unimproved grassland; examples of barely suitable (graded 2) include reeds, shrub and heathland and boulders, neutral grassland; examples of unsuitable (graded 1) include heather, acid grassland, unimproved grass and boulders, bog; examples of no accessible vegetation (graded 0) include shingle and sand, buildings, rock, urban, freshwater and saltwater.
+
+Whilst vegetation is a dominant factor in determining habitat suitability for beaver, so is proximity to a water body [@gurnell1998] . Beavers use water bodies both for security and to access foraging areas. It is thought that most foraging occurs within 10 m of a watercourse/body (Haarberg and Rosell, 2006), and rarely above 50 m [@stringer2018] . However, greater foraging distances have, on occasion, been observed [@macfarlane2017] and 100 m has been accepted as a maximum distance in which the vast majority of foraging occurs. Therefore, areas \>100m from a river bank or still waterbody were classified as No Data (NA) due to its inaccessibility.
+
+The BHI has a resolution of 10 m. Therefore at a large scale, as shown in Figure 1, it can be hard to interpret. Therefore we also provide the BHI at a resampled resolution of 1km (Figure2). This aids interpretation at the regional/national scale.
+
+&nbsp;
+
+*Table 2: provides definitions for the BHI values. A value of five represents vegetation that is highly suitable or preferred by beavers and that also lies within 100 m of a waterbody. Zero scores are given to areas that contain no vegetation or are greater than 100 m from a waterbody. It is important to note that the model considers terrestrial habitat, where foraging primarily occurs, and therefore watercourses themselves are also scored zero.*
+
+```{r BHI value descriptions,  echo=FALSE, warning=FALSE,message=FALSE,error=FALSE,fig.keep='all' }
+
+bfi_defs()
+
+```
+
+
+
+## Beaver Dam Capacity
+
+Beavers are well known as ecosystem engineers [@gurney1996; @hartman2006] due to their ability to build dams, construct lodges, fell trees, excavate canals and burrow into banks. Of these behaviours, it is dam construction that has the most pronounced effect on the surrounding landscape by impounding water behind the structures which often results in the formation of complex and diverse wetland systems. Beavers construct dams for two main reasons: (i) to increase the depth of water surrounding a dwelling, such as a lodge or burrow, in order to submerge the entrance (Gurnell, 1998) and (ii) to increase the ease of movement within a territory to access areas of desirable vegetation and evade predators [@campbell-palmer2016].
+
+The construction of beaver dams can help to restore natural function within riverine and riparian systems by: (i) attenuating peak flood flows and extending lag times by increasing storage capacity and surface roughness[@nyssen2011; @puttock2017; @puttock2021]; (ii) maintaining base flow by storing water during dry periods and raising local ground water tables @gibson2014; (iii) capturing fine sediment and storing nutrients[@butler1995; @devisscher2014; @lizarralde1996; @puttock2018]; (iv) aggrading incised channels, promoting floodplain reconnection[@pollock2014] and enhancing channel complexity [@john2004]; (v) increasing habitat heterogeneity and biodiversity [@law2016; @stringer2016].
+
+Although beavers offer some promising benefits, from an ecosystem service perspective, their industrious behaviour can also cause considerable conflict where valuable infrastructure or farmland is impacted [@schwab2003]. Many of these conflicts can be rectified or managed in such a way that minimises damage whilst ensuring the welfare of the animals (Campbell-Palmer et al., 2016). An understanding of where dams are likely to be constructed is important for the effective management of these conflicts, especially in the context of GB where Beaver populations are expanding.
+
+The Beaver restoration assessment tool (BRAT) was developed in North America (Macfarlane et al., 2017) to determine the capacity for river systems to support Beaver dams. The BRAT model has been further deployed in a range of different river systems to aid both Beaver recolonisation and beaver dam analogue led restoration. The BRAT model not only provides an invaluable tool for designing effective, empirically based, restoration strategies but it also indicates where Beaver dams might be constructed and therefore where they may cause potential management/conflict issues. The BRAT model is structured around a river network, calculating a range of environmental factors for each reach which are evaluated using fuzzy logic which factors in the considerable uncertainty that is associated with beaver habitat/dam suitability. Furthermore, it provides a range of output values to predict the dam capacity which has implications for beaver preference towards a given location.
+
+We have therefore used the BRAT framework to develop an optimised beaver dam capacity (BDC) model for Great Britain [@graham2020]. The model infers the density of dams that can be supported by stream reaches (110 m ± 50 SD) across a catchsment. Using low-cost and open-source datasets, the following attributes are calculated for each reach: (i) stream gradient, (ii) low (Q80) and high flow (Q2) stream power, (iii) bankfull width, (iv) stream order, and (v) the suitability of vegetation, within 10m and 40m of the bank, for beaver dam construction. These controlling variables are combined using a sequence of inference and fuzzy inference systems which follow an expert-defined rules system that allows for the considerable uncertainty often associated with these types of complex ecological processes.
+
+Each reach was classified for dam capacity using five categories from none, defined as no capacity for damming to pervasive where a maximum capacity of 16-30 dams could theoretically be constructed in a km of channel. It is important to note that the model assumes both reach and catchment population carrying capacity for beaver. Therefore, in reality the maximum number of dams indicated in a category class is unlikely to occur. A full list of BDC classifications is included in Table 2.
+
+&nbsp;
+
+*Table 2: BDC classifications and definitions.*
+
+```{r BDC value descriptions,  echo=FALSE, warning=FALSE,message=FALSE,error=FALSE,fig.keep='all' }
+
+bdc_class()
+
+```
+
+## Open Beaver Network
+
+The BeaverNetwork model provides a synthesis of both the BHI and BDC models along a river network spatial vector. We have adopted the Open Rivers Network [@ordnancesurvey2022] which provides reasonable detail and hydrological consistency. The river segements were divided into smaller reach segments. For each reach, there are  estimates for the forage suitability within 10 and 40m of the river bank and the dam capacity for the reach. In addition to these data, information for the probability of forage and dam construction and the number of dams which is estimated for the reach (including confidence limits) based on observed foraging/dam building behaviour as demonstrated in Graham, et al. (2020). The probability of forage/dam construction was calculated using binomial Bayesian modelling and dam number estimates were calculated using regression analysis (zero-inflated negative binomial model). Predictions for reach scale dam counts should only be considered as a sum at the (sub) catchment scale (\>= 5km^2^).
+
+&nbsp;
+
+*Table 3: Description of variables provided int the OpenBeaverNetwork dataset.*
+
+```{r BDC variable table,  echo=FALSE, warning=FALSE,message=FALSE,error=FALSE,fig.keep='all'}
+
+bdc_data_table()
+
+```
+
+&nbsp;
+
+*Table 2: Dataset Inventory. Files may be downloaded from the tabs in the navigation bar or via diect url download. The URLS are provided in the About > Summary tab*
+```{r BHI value data_invent,  echo=FALSE, warning=FALSE,message=FALSE,error=FALSE,fig.keep='all' }
+
+Data_inv()
+
+```
+
+&nbsp;
+
+### Use of Beaver Dam Capacity (BDC)
+The BDC model estimates the capacity of river systems to support dams at the reach-scale (c.a. 110m). The model also highlights reaches that are more likely to be dammed by beaver and estimates the number of beaver dams that could occur for a catchment at population carrying capacity. As such, this highly detailed tool would provide understanding of where dams are most likely to occur and in what densities, supporting future work on the conflicts and opportunities that might accrue from beaver reintroduction. However, as with BFI, it is important to remember BDC is a model and for all critical decisions, particularly at the local scale, understanding from modelling results should be supplemented by site visits. The following caveats in-particular should be considered for interpretation of BDC results:
+
+
+* BDC is heavily dependent on the input channel network. In some areas, flow pathways can be complex and not always accurately represented by even detailed river network mapping.
+* BDC modelling is a snapshot in time and will not reflect any subsequent alterations to channel networks.
+* Flow conditions display a high degree of temporal variability, short term fluctuations due to rainfall events patterns and seasonal trends will alter the suitability of a channel for damming.
+* A channel classed as having a rare capacity for damming, might see this capacity increase during drought periods, but conversely reduce to none during the wet/winter season.
+* BDC does not consider the exact spatial distribution or configuration of dams, which is also likely to be heavily dependent on beaver population dynamics.
+* BDC reflects the capacity of a given reach to support beaver dams (assuming catchment is at beaver population carrying capacity) rather than the actual number of dams that are likely to occur. In isolation, BDC cannot predict the likely number of dams in a catchment.
+* Most operational catchment boundaries supplied for determination of BDC extent exclude coastal and tidal reaches. Whilst these are often not suitable for beaver damming, it is important to highlight their omission.
+* Included in the Beaver network is a summary of the forage suitability at both 10 and 40m from the bank. Due to the way in which the search buffers are generated, when a reach has a width > 60 m, no vegetation will be detected. Therefore the use of reach-based BFI estimates for large waterbodies such as lakes can lead to an underestimate of BFI. In these situations the BFI raster dataset may provide greater insight.
+
+
+### Use of BFI
+BFI provides a resource for quantifying beaver forage suitability with national coverage. A high (10 m) spatial resolution can inform detailed local decision making. Examples of BFI presented in the results section overlaid on satellite imagery reflect its ability to provide a useful classification of beaver habitat, based upon a vegetation suitability ranking and access to water (including both river network and waterbodies such as ponds and lakes). However, it is critical to note that BFI is a model rather than an absolute reflection of reality and the below caveats should be considered when using the BFI model outputs.
+
+
+* Remote sensing/mapping vegetation/landuse datasets are not to species level. However, beavers are generalists; foraging and utilising a wide range of vegetation so these more generalised datasets are appropriate. However, if more detailed information is required (i.e. protected plant species) supplementary local studies and data sets may prove beneficial.
+* Each dataset is essentially a snapshot in time. Areas of vegetation removal or land use change may degrade vegetation suitability whilst conversely replanting and conservation schemes may improve vegetation suitability. However, a combination of datasets and methodology for ranking vegetation suitability minimise the risk of areas of suitable/unsuitable vegetation being missed currently.
+* Some small channels i.e. agricultural ditches and ponds may be missing or outdated in the dataset meaning beavers could access or exist in such areas but not be correctly classified by BFI model as falling within 100m of a water body.
+* Most literature cites 50 m as maximum foraging range of beaver (i.e. Stringer et al., 2018) however, to incorporate uncertainty, site development (i.e. beavers damming or canal building allowing them to extend their foraging range) and due to reports of further foraging we have adopted 100 m as shown by Macfarlane et al. (2017). There are extreme reports of beavers moving up to 250m from channel (Macfarlane et al., 2015) but this is thought to be incredibly rare and not applicable to a general widely deployed habitat model.
+* BFI focused on vegetation suitability and distance to channel/waterbody as a computationally efficient model that can be deployed nationally. However, other local factors that will restrict access to water/vegetation particularly human infrastructure culverted/constrained sections walls/fences may locally limit beaver habitat suitability.
+* Due to the above considerations it is always recommended that if making important and detailed decisions at the local scale, supplementary site visits are undertaken.
+
+
+::: {style="page-break-after: always; visibility: hidden"}
+\pagebreak
+:::
+
+## Reference List
+
+::: {style="foot-note-size: always; visibility: hidden"}
+\footnotesize
+:::
